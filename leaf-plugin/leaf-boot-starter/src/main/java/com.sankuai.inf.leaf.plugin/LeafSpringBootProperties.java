@@ -10,14 +10,15 @@ import org.springframework.stereotype.Component;
  * @date 2019/10/09
  */
 @Component
-@ConfigurationProperties(prefix = "leaf",ignoreUnknownFields = true)
+@ConfigurationProperties(prefix = "keentech.base.leaf", ignoreUnknownFields = true)
 @PropertySource("classpath:leaf.properties")
 public class LeafSpringBootProperties {
     private String name;
     private Segment segment;
     private Snowflake snowflake;
-    public static class Segment{
-        private boolean enable=false;
+
+    public static class Segment {
+        private boolean enable = false;
         private String url;
         private String username;
         private String password;
@@ -49,6 +50,7 @@ public class LeafSpringBootProperties {
         public boolean isEnable() {
             return enable;
         }
+
         public void setEnable(boolean enable) {
             this.enable = enable;
         }
@@ -56,14 +58,16 @@ public class LeafSpringBootProperties {
         @Override
         public String toString() {
             return "Segment{" +
-                    "enable=" + enable +
-                    '}';
+                   "enable=" + enable +
+                   '}';
         }
     }
-    public static class Snowflake{
-        private boolean enable =false;
+
+    public static class Snowflake {
+        private boolean enable = false;
         private String address;
         private int port;
+
         public String getAddress() {
             return address;
         }
@@ -83,6 +87,7 @@ public class LeafSpringBootProperties {
         public boolean isEnable() {
             return enable;
         }
+
         public void setEnable(boolean enable) {
             this.enable = enable;
         }
@@ -90,8 +95,8 @@ public class LeafSpringBootProperties {
         @Override
         public String toString() {
             return "Snowflake{" +
-                    "enable=" + enable +
-                    '}';
+                   "enable=" + enable +
+                   '}';
         }
     }
 
@@ -123,9 +128,9 @@ public class LeafSpringBootProperties {
     @Override
     public String toString() {
         return "LeafSpringBootProperties{" +
-                "name='" + name + '\'' +
-                ", segment=" + segment +
-                ", snowflake=" + snowflake +
-                '}';
+               "name='" + name + '\'' +
+               ", segment=" + segment +
+               ", snowflake=" + snowflake +
+               '}';
     }
 }

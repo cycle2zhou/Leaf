@@ -35,14 +35,20 @@
         <url>https://github.com/Meituan-Dianping</url>
     </organization>
     <properties>
+        <!--编译字符集-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <!--编译jdk版本-->
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <!--输出jdk版本-->
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <spring.version>5.2.9.RELEASE</spring.version>
         <junit.version>4.12</junit.version>
         <leaf.spring.version>5.0.5.RELEASE</leaf.spring.version>
         <maven.compiler.version>3.5.1</maven.compiler.version>
-        <mybatis.version>3.3.0</mybatis.version>
+        <mybatis.version>3.5.3</mybatis.version>
         <perf4j.version>0.9.16</perf4j.version>
-        <curator.version>2.6.0</curator.version>
+        <curator.version>2.13.0</curator.version>
         <slf4j.version>1.7.2</slf4j.version>
         <druid.version>1.0.18</druid.version>
         <jackson-databind.version>2.9.6</jackson-databind.version>
@@ -169,24 +175,39 @@
 
     <distributionManagement>
         <repository>
-            <id>rdc-releases</id>
-            <url>https://repo.rdc.aliyun.com/repository/30278-release-hOamJV/</url>
+            <id>maven-releases</id>
+            <name>Internal Releases</name>
+            <url>http://maven.keendata.com:8081/repository/maven-releases/</url>
         </repository>
         <snapshotRepository>
-            <id>rdc-snapshots</id>
-            <url>https://repo.rdc.aliyun.com/repository/30278-snapshot-k5cEXE/</url>
+            <id>maven-snapshots</id>
+            <name>Internal Snapshots</name>
+            <url>http://maven.keendata.com:8081/repository/maven-snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
     <build>
         <finalName>leaf</finalName>
         <plugins>
             <plugin>
+                <!--源码编译插件-->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven.compiler.version}</version>
+                <version>3.8.1</version>
+                <!-- 对插件进行全局设置，不管此插件绑定到什么阶段都使用同样的配置 -->
                 <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
+                    <!-- 编译1.8版本的源文件 -->
+                    <source>${maven.compiler.source}</source>
+                    <!-- 生成与JVM 1.8 兼容的字节码文件 -->
+                    <target>${maven.compiler.target}</target>
+                    <!-- 字符编码-->
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.springframework.boot</groupId>
+                            <artifactId>spring-boot-configuration-processor</artifactId>
+                            <version>2.3.9.RELEASE</version>
+                        </path>
+                    </annotationProcessorPaths>
                 </configuration>
             </plugin>
             <plugin>
